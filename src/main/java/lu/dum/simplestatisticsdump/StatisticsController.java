@@ -34,12 +34,14 @@ public class StatisticsController {
      * So this Endpoint is there as a backup, since GET should result in  less problems.
      */
     @GetMapping(value = "/submit-statistics", produces = "application/json")
+    @CrossOrigin(origins = "*") // Shouldn't be needed, but adding it just in case…
     public Map<String, Object> submitStatisticsViaGET(@RequestParam Map<String, Object> queryParameters) {
         GlobalWrapper statistics = updateStatisticsWithIncomingData(queryParameters);
         return processStatistics(statistics);
     }
 
     @PostMapping(value = "/submit-statistics", produces = "application/json")
+    @CrossOrigin(origins = "*")
     public Map<String, Object> submitStatisticsViaPOST(@RequestBody Map<String, Object> data) {
         GlobalWrapper statistics = updateStatisticsWithIncomingData(data);
         return processStatistics(statistics);
@@ -69,7 +71,6 @@ public class StatisticsController {
             fileContent = Files.readString(Path.of(getAbsoluteFilePath()));
             return gson.fromJson(fileContent, GlobalWrapper.class);
         } catch (IOException e) {
-            e.printStackTrace();
             return new GlobalWrapper(new ArrayList<>());
         }
     }
