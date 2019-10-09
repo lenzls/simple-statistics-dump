@@ -3,6 +3,7 @@ package lu.dum.simplestatisticsdump;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -18,7 +19,8 @@ import java.util.Map;
 @RestController
 public class StatisticsController {
 
-    private static final String filePath = "/tmp/";
+    @Value("${statisticsFileFolder:/tmp/}")
+    public String filePath;
     private static final String fileName = "statistics.txt";
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -30,7 +32,7 @@ public class StatisticsController {
     /**
      * Normally that kind of stuff should be done via POST,
      * but in the past we always had last minute problems regarding CORS.
-     *
+     * <p>
      * So this Endpoint is there as a backup, since GET should result in  less problems.
      */
     @GetMapping(value = "/submit-statistics", produces = "application/json")
