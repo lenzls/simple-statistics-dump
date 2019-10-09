@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>lu.dum</groupId>
 	<artifactId>simple-statistics-dump</artifactId>
-	<version>0.0.3</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>simple-statistics-dump</name>
 	<description>Statistics gathering server made for Ludum dare games</description>
 
