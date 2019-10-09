@@ -42,3 +42,26 @@ and `GET <host>/submit-statistics?ending=ending1&distanceTraveled=2507&endbossDe
 
 The POST endpoint should be preferred, but if unforeseen problems with CORS or something arise, 
 then this might be a useful workaround.
+
+# Example client code
+
+```javascript
+const SERVER_URL = "<HOST>:5000"
+
+export async function sendStatistics(decision) {
+    const content = {
+        ending: decision,
+        distanceTraveled: 2507,
+        endbossDefeated: true
+    }
+
+    const response = await fetch(`${SERVER_URL}/submit-statistics`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(content)
+    })
+    console.log(await response.json());
+}
+```
