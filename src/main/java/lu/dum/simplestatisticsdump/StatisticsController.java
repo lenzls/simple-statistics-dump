@@ -33,19 +33,26 @@ public class StatisticsController {
      *
      * So this Endpoint is there as a backup, since GET should result in  less problems.
      */
-    @GetMapping("/submit-statistics")
-    public String submitStatisticsViaGET(@RequestParam Map<String, Object> queryParameters) {
-        updateStatisticsWithIncomingData(queryParameters);
-        return "Saved";
+    @GetMapping(value = "/submit-statistics", produces = "application/json")
+    public Map<String, Object> submitStatisticsViaGET(@RequestParam Map<String, Object> queryParameters) {
+        GlobalWrapper statistics = updateStatisticsWithIncomingData(queryParameters);
+        return processStatistics(statistics);
     }
 
-    @PostMapping("submit-statistics")
-    public String submitStatisticsViaPOST(@RequestBody Map<String, Object> data) {
-        updateStatisticsWithIncomingData(data);
-        return "Saved";
+    @PostMapping(value = "/submit-statistics", produces = "application/json")
+    public Map<String, Object> submitStatisticsViaPOST(@RequestBody Map<String, Object> data) {
+        GlobalWrapper statistics = updateStatisticsWithIncomingData(data);
+        return processStatistics(statistics);
     }
 
-    private void updateStatisticsWithIncomingData(Map<String, Object> data) {
+    private Map<String, Object> processStatistics(GlobalWrapper statistics) {
+        // TODO IMPLEMENTATION:
+        // Calculate here what you want to return to the client
+        // based on all the statistics gathered so far.
+        return Map.of("status", "success");
+    }
+
+    private GlobalWrapper updateStatisticsWithIncomingData(Map<String, Object> data) {
         GlobalWrapper statistics = readStatisticsFile();
 
         String currentTimestamp = Instant.now().truncatedTo(ChronoUnit.SECONDS).toString();
@@ -53,6 +60,7 @@ public class StatisticsController {
         statistics.entries.add(statisticsEntry);
 
         overwriteStatisticsFile(statistics);
+        return statistics;
     }
 
     private GlobalWrapper readStatisticsFile() {
