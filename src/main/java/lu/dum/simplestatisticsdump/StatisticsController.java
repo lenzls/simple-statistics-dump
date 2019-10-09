@@ -21,7 +21,7 @@ public class StatisticsController {
 
     @Value("${statisticsFileFolder:/tmp/}")
     public String filePath;
-    private static final String fileName = "statistics.txt";
+    private static final String fileName = "statistics.json";
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
