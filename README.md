@@ -1,8 +1,8 @@
 # simple-statistics-dump
-Statistics gathering server made for Ludum dare games
+Statistics gathering server made for Ludum Dare games
 
-Because it already happened twice, that one and a half hours before the deadline of the Jam we decided to set up 
-a simple web server, where we can send statistics about player decisions to. And both times I failed because 
+It already happened twice, that one and a half hours before the deadline of the Jam we decided to set up 
+a simple web server in order to send statistics about player decisions. And both times I failed because 
 of stupid reasons. 
 
 Next time we are prepared and can reuse this!
