@@ -37,16 +37,16 @@ public class StatisticsController {
      */
     @GetMapping(value = "/submit-statistics", produces = "application/json")
     @CrossOrigin(origins = "*") // Shouldn't be needed, but adding it just in case…
-    public Map<String, Object> submitStatisticsViaGET(@RequestParam Map<String, Object> queryParameters) {
+    public Object submitStatisticsViaGET(@RequestParam Map<String, Object> queryParameters) {
         GlobalWrapper statistics = updateStatisticsWithIncomingData(queryParameters);
-        return processStatistics(statistics);
+        return gson.toJson(statistics);
     }
 
     @PostMapping(value = "/submit-statistics", produces = "application/json")
     @CrossOrigin(origins = "*")
-    public Map<String, Object> submitStatisticsViaPOST(@RequestBody Map<String, Object> data) {
+    public Object submitStatisticsViaPOST(@RequestBody Map<String, Object> data) {
         GlobalWrapper statistics = updateStatisticsWithIncomingData(data);
-        return processStatistics(statistics);
+        return gson.toJson(statistics);
     }
 
     private Map<String, Object> processStatistics(GlobalWrapper statistics) {
