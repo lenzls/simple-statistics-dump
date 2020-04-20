@@ -42,6 +42,12 @@ public class StatisticsController {
         return gson.toJson(statistics);
     }
 
+    @GetMapping(value = "/statistics", produces = "application/json")
+    @CrossOrigin(origins = "*") // Shouldn't be needed, but adding it just in case…
+    public Object retrievingStatistics() {
+        return gson.toJson(readStatisticsFile());
+    }
+
     @PostMapping(value = "/submit-statistics", produces = "application/json")
     @CrossOrigin(origins = "*")
     public Object submitStatisticsViaPOST(@RequestBody Map<String, Object> data) {
